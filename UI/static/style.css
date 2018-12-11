@@ -128,8 +128,9 @@ header nav{
 footer{
     padding: 20px;
     margin-top: -20px;
+    border-top: #e8491d 3px solid;
     text-align: center;
-    background-color: #808080;
+    background-color: #ffffff;
     height: 20px;
   }
 }
