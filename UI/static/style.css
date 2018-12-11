@@ -1,0 +1,136 @@
+/* body style */
+body{
+  font-family: Arial,sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  padding: 0;
+  margin: 0;
+  background-color: #f4f4f4
+}
+
+/* global */
+.container{
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+}
+
+ul{
+  margin: 0;
+  padding: 0;
+}
+
+/* header */
+header{
+  background: #ffffff;
+  color: #071568;
+  padding-top: 30px;
+  min-height: 70px;
+  border-bottom: #e8491d 3px solid;
+}
+
+header a{
+  color: #071568;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+header li{
+  float: left;
+  display: inline;
+  padding: 0 20px 0 20px;
+}
+
+header #branding{
+  float: left;
+}
+
+header #branding h1{
+  margin: 0;
+  float: right;
+}
+
+header nav{
+  float: right;
+  margin-top: 10px;
+}
+
+.avatar{
+  float: left;
+}
+
+/* .login-button{
+  float: right;
+  border: none;
+  outline: none;
+  height: 20px;
+  background: #1E90FF;
+  color: #fff;
+  font-size: 13px;
+  color: #ffffff;
+  text-decoration: none;
+} */
+
+.login-button {
+  background-color: #1E90FF;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  margin-top: -30px;
+  height: auto;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  border-radius: 4px;
+}
+
+.question-button {
+  float: right;
+  background-color: #1E90FF;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  margin-top: -30px;
+  height: auto;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  border-radius: 4px;
+}
+
+
+.questions{
+  /* position: relative;
+  max-width: 800px;
+  height: auto;
+  margin: 20px 10px;
+  padding: 5px;
+  background-color: #DADADA;
+  border-radius: 3px;
+  border: 5px solid #ccc;
+  text-align: center; */
+
+  width: 70%;
+  border: 5px solid ;
+  padding: 25px;
+  margin: 25px;
+  text-align: center;
+}
+
+.questions a{
+  text-decoration: none;
+  color:#071568;
+}
+
+footer{
+    padding: 20px;
+    margin-top: -20px;
+    border-top: #e8491d 3px solid;
+    text-align: center;
+    background-color: #ffffff;
+    height: 20px;
+  }
+}
