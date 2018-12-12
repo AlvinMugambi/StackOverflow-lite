@@ -179,3 +179,28 @@ footer{
   font-size: 18px;
   border-radius: 20px;
 }
+
+.ask_qn input{
+  background-color: #ffffff;
+  width: 700px;
+  height: 30px;
+}
+
+.ask_qn button{
+  background-color: #1E90FF;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  height: auto;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  border-radius: 4px;
+}
+
+.ask_qn p{
+  font-weight: bold;
+}
