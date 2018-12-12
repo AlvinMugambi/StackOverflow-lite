@@ -115,7 +115,9 @@ header nav{
   text-align: center; */
 
   width: 70%;
-  border: 5px solid ;
+  border: 5px solid;
+  border-left: none;
+  border-right: none;
   padding: 25px;
   margin: 25px;
   text-align: center;
@@ -203,4 +205,59 @@ footer{
 
 .ask_qn p{
   font-weight: bold;
+}
+
+/* Question boxes */
+.mini-counts{
+  font-size: 17px;
+  font-weight: 300;
+  color: #6a737c;
+  margin-bottom: 4px;
+}
+
+.views{
+  display: inline-block;
+  height: 38px;
+  min-width: 40px;
+  margin: 0 7px 0 0;
+  font-size: 11px;
+  color: #1E90FF;
+  padding: 7px 6px;
+}
+
+.status_unanswered{
+  display: inline-block;
+  margin: 0 3px 0 0;
+  min-width: 44px;
+  height: auto;
+  font-size: 11px;
+  padding: 6px;
+  border-radius: 3px;
+  color: #1E90FF;
+}
+
+.votes{
+  display: inline-block;
+  height: 38px;
+  min-width: 38px;
+  margin: 0 3px 0 0;
+  font-size: 11px;
+  color: #1E90FF;
+  padding: 7px 6px;
+}
+
+.cp{
+  float: none;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  margin-right: 0;
+  padding: 0 8px 0 0;
+  box-sizing: content-box;
+  flex-shrink: 0;
+}
+
+.questions p{
+  float: none;
+  margin: 0;
 }
