@@ -39,6 +39,27 @@ def create_user():
 
 @app.route('/login', methods=['POST'])
 def login():
+    password = request.get_json()['password']
+    username = request.get_json()['name']
+    response = None
+
+    if not password or not username:
+        # if field(s) are empty
+        response = jsonify({"error": "Name and email fiels required"})
+        # response.status_code = 400
+        return response, 400
+
+    reg_user = verify_user_record(username, password)
+
+    # print("USER >> ", user)
+    for user in users:
+        public_id= user['public_id']
+    if reg_user == "Doesn't exist":
+        return jsonify({"message": "Please Register first"}), 404
+
+    token = jwt.encode({'public_id': public_id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'],algorithm='HS256')
+
+    return jsonify({'token': token.decode('UTF-8')})
 
 if __name__ == '__main__':
     app.run(debug=True)
