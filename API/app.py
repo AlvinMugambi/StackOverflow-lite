@@ -21,7 +21,7 @@ def create_user():
         return response, 400
     new_user= verify_user_email(email)
     print("USER >> ", new_user)
-    
+
     if new_user == 'Email already taken!':
         return jsonify({'error': 'Email already taken!'})
 
@@ -37,6 +37,8 @@ def create_user():
 
     return jsonify({'User':users}), 201
 
+@app.route('/login', methods=['POST'])
+def login():
 
 if __name__ == '__main__':
     app.run(debug=True)
