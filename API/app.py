@@ -99,6 +99,7 @@ def login():
 @app.route('/users', methods=['GET'])
 @token_required
 def get_all_users(current_user):
+    return jsonify({'users':users})
 
 if __name__ == '__main__':
     app.run(debug=True)
