@@ -1,12 +1,44 @@
 import json
-from model import users, verify_user_record, verify_user_email,questions
+import datetime
+import jwt
+from functools import wraps
 from flask import Flask, request, jsonify, make_response
 from werkzeug.security import generate_password_hash, check_password_hash
-
+import uuid
+from model import users, verify_user_record, verify_user_email,questions
 
 app= Flask(__name__)
 
 app.config['SECRET_KEY']= 'thisissecret'
+
+# MY DECORATORS
+
+    # decorator where a user requires a token to view
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token= None
+        if 'x-access-token' in request.headers:
+            token= request.headers['x-access-token']
+        if not token:
+            return jsonify({'message':'Token is missing!'}),401
+
+        try:
+            data= jwt.decode(token, app.config['SECRET_KEY'])
+            current_user= None
+            for user in users:
+                if user['public_id'] == data['public_id']:
+                    current_user= user
+
+        except:
+            return jsonify({'message':'Token is invalid'}), 401
+
+        return f(current_user, *args, **kwargs)
+    return decorated
+
+
+# MY ROUTES
+    # register/add a user
 
 @app.route('/register', methods=['POST'])
 def create_user():
@@ -37,6 +69,8 @@ def create_user():
 
     return jsonify({'User':users}), 201
 
+
+# authenticate login and create token
 @app.route('/login', methods=['POST'])
 def login():
     password = request.get_json()['password']
