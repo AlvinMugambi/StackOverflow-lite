@@ -34,7 +34,6 @@ def token_required(f):
     return decorated
 
 
-
 # MY ROUTES
     # register/add a user
 
