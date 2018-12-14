@@ -21,6 +21,7 @@ def create_user():
         return response, 400
     new_user= verify_user_email(email)
     print("USER >> ", new_user)
+    
     if new_user == 'Email already taken!':
         return jsonify({'error': 'Email already taken!'})
 
