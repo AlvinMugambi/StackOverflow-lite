@@ -64,11 +64,12 @@ def create_user():
         'name':name,
         'email':email,
         'password':hashed_password,
+        'password':password,
         'public_id':public_id
         }
     users.append(user)
 
-    return jsonify({'User':users}), 201
+    return jsonify({'Message':'Registered succesfully'}), 201
 
 
 # authenticate login and create token
@@ -78,9 +79,10 @@ def login():
     username = request.get_json()['name']
     response = None
 
+
     if not password or not username:
         # if field(s) are empty
-        response = jsonify({"error": "Name and email fiels required"})
+        response = jsonify({"error": "Name and Password fields required"})
         # response.status_code = 400
         return response, 400
 
@@ -101,6 +103,8 @@ def login():
 @token_required
 def get_all_users(current_user):
     return jsonify({'users':users})
+
+    # a user can ask a question
 
 if __name__ == '__main__':
     app.run(debug=True)
