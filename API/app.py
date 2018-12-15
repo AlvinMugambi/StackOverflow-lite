@@ -105,6 +105,19 @@ def get_all_users(current_user):
     return jsonify({'users':users})
 
     # a user can ask a question
+@app.route('/ask',methods=['POST'])
+@token_required
+def post_question(current_user):
+    qn= request.get_json()['Question']
+    # if no question is posted
+    if not qn:
+        return jsonify({"message": "Ask a question"}), 404
+    question_id=len(questions)+1
+    question={'id':question_id, 'Question':qn}
+    # append the question dict to the questions list
+    questions.append(question)
+
+    return jsonify({'Your Question':qn})
 
 if __name__ == '__main__':
     app.run(debug=True)
