@@ -51,6 +51,7 @@ def create_user():
     if not name or not email or not password:
         response = jsonify({"error": "Name, email and password fields required"})
         return response, 400
+
     new_user= verify_user_email(email)
     print("USER >> ", new_user)
 
