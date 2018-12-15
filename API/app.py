@@ -105,6 +105,10 @@ def get_all_users(current_user):
     return jsonify({'users':users})
 
     # a user can ask a question
+@app.route('/ask',methods=['POST'])
+@token_required
+def post_question(current_user):
+    return ''
 
 if __name__ == '__main__':
     app.run(debug=True)
