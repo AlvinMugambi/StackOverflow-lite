@@ -128,7 +128,15 @@ def get_all_questions():
     # a user can search for a specific # QUESTION:
 @app.route('/find/<int:question_id>', methods= ['GET'])
 def view_question(question_id):
-    return ''
+    
+    clicked_question = None
+    for question in questions:
+        if question['id'] == question_id:
+            clicked_question= question
+    if not clicked_question:
+        return "message=Question with id {} not found".format(question_id)
+
+    return jsonify({"Question" :clicked_question}),201
 
 if __name__ == '__main__':
     app.run(debug=True)
