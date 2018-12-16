@@ -154,5 +154,20 @@ def answer_question(current_user,question_id):
             my_qn = question
     return jsonify({'result':my_qn}), 201
 
+    # a registered user cam delete a question
+@app.route('/remove/<int:question_id>',methods=['DELETE'])
+@token_required
+def delete_question(current_user,question_id):
+
+
+    for question in questions:
+        if question_id in question.values():
+            questions.remove(question)
+
+    return jsonify({'Message':'Deleted succesfully'}), 201
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
