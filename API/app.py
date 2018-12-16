@@ -143,7 +143,16 @@ def view_question(question_id):
 @app.route('/answer/<int:question_id>', methods=['POST'])
 @token_required
 def answer_question(current_user,question_id):
-    return ''
+    answer= request.get_json()['Answer']
+
+    if not answer:
+        return jsonify({"Message":"Please provide an answer"}), 400
+    my_qn= None
+    for question in questions:
+        if question_id in question.values():
+            question['answer']=answer
+            my_qn = question
+    return jsonify({'result':my_qn}), 201
 
 if __name__ == '__main__':
     app.run(debug=True)
