@@ -111,13 +111,13 @@ def post_question(current_user):
     qn= request.get_json()['Question']
     # if no question is posted
     if not qn:
-        return jsonify({"message": "Ask a question"}), 404
+        return jsonify({"message": "Ask a question"}), 400
     question_id=len(questions)+1
     question={'id':question_id, 'Question':qn}
     # append the question dict to the questions list
     questions.append(question)
 
-    return jsonify({'Your Question':qn})
+    return jsonify({'Your Question':qn}), 201
 
 if __name__ == '__main__':
     app.run(debug=True)
