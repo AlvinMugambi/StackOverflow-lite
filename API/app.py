@@ -119,5 +119,11 @@ def post_question(current_user):
 
     return jsonify({'Your Question':qn}), 201
 
+
+    # a user can view all Questions
+@app.route('/questions', methods=['GET'])
+def get_all_questions():
+    return jsonify({'Questions':questions}), 201 
+
 if __name__ == '__main__':
     app.run(debug=True)
