@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width">
     <title>StackOverflow-lite | Home</title>
     <link rel="stylesheet" href="../static/style.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   </head>
   <body>
     <header>
@@ -13,6 +14,7 @@
           <a href="homepage.html"><img class= "avatar" src="../static/index.jpg" alt="coming soon"></a>
           <h1>StackOverflow-lite</h1>
         </div>
+
         <nav>
           <ul>
             <li><a href="login.html"><button class= "login-button" type="button" name="Login">Login</button></a></li>
@@ -22,13 +24,18 @@
       </div>
     </header>
 
-    <section>
+    <section class='grid'>
       <div class="container">
         <h1 id="top">Top Questions</h1>
         <a href="login.html"><button class="question-button" type="button" name="Ask a question">Ask a question</button></a>
+        <div class="side-nav fh">
+          <a href="good_question.html"><h2>  How to write a good question</h2></a>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
         <!-- the questions segment -->
         <section class="questions">
 
+
           <div class="cp">
 
 
@@ -52,10 +59,17 @@
               </div>
               <div>views</div>
             </div>
-            <p><a href="get_question.html">Lorem ipsum dolor sit amet, consectetuer adipiscing elit?</a></p>
-          </div>
 
+            <p><a href="get_question.html">Lorem ipsum dolor sit amet, consectetuer adipiscing elit?</a></p>
+            <div class="wrap">
+              <i onclick="" class = "fa fa-thumbs-up"></i>
+            </div>
+            <div class="wrap">
+              <i onclick="" class = "fa fa-thumbs-down"></i>
+            </div>
+          </div>
         </section>
+
 
         <section class="questions">
 
@@ -82,8 +96,50 @@
               <div>views</div>
             </div>
             <p><a href="get_question.html">Lorem ipsum dolor sit amet, consectetuer adipiscing elit?</a></p>
-          </div>
+            <div class="wrap">
+              <i onclick="" class = "fa fa-thumbs-up"></i>
+            </div>
+            <div class="wrap">
+              <i onclick="" class = "fa fa-thumbs-down"></i>
+            </div>
 
+          </div>
+        </section>
+
+
+        <section class="questions">
+
+          <div class="cp">
+
+            <div class="votes">
+              <div class="mini-counts">
+                <span title = "0 votes">0</span>
+              </div>
+              <div>votes</div>
+            </div>
+
+            <div class="status_unanswered">
+              <div class="mini-counts">
+                <span title="0 answers">0</span>
+              </div>
+              <div>answers</div>
+            </div>
+
+            <div class="views">
+              <div class="mini-counts">
+                <span title="0 views">0</span>
+              </div>
+              <div>views</div>
+            </div>
+            <p><a href="get_question.html">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor?</a></p>
+            <div class="wrap">
+              <i onclick="" class = "fa fa-thumbs-up"></i>
+            </div>
+            <div class="wrap">
+              <i onclick="" class = "fa fa-thumbs-down"></i>
+            </div>
+
+          </div>
         </section>
 
         <section class="questions">
@@ -110,13 +166,22 @@
               </div>
               <div>views</div>
             </div>
-            <p><a href="get_question.html">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus?</a></p>
-          </div>
+            <p><a href="get_question.html">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor?</a></p>
+            <div class="wrap">
+              <i onclick="" class = "fa fa-thumbs-up"></i>
+            </div>
+            <div class="wrap">
+              <i onclick="" class = "fa fa-thumbs-down"></i>
+            </div>
 
+          </div>
         </section>
+
+
 
       </div>
     </section>
+
 
     <footer>
       <p>StackOverflow-lite &copy:2018</p>
