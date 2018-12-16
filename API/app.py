@@ -123,7 +123,12 @@ def post_question(current_user):
     # a user can view all Questions
 @app.route('/questions', methods=['GET'])
 def get_all_questions():
-    return jsonify({'Questions':questions}), 201 
+    return jsonify({'Questions':questions}), 201
+
+    # a user can search for a specific # QUESTION:
+@app.route('/find/<int:question_id>', methods= ['GET'])
+def view_question(question_id):
+    return ''
 
 if __name__ == '__main__':
     app.run(debug=True)
