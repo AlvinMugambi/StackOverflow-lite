@@ -98,16 +98,21 @@ def login():
 
     return jsonify({'token': token.decode('UTF-8')})
 
+
+
     # view all users in the database
 @app.route('/users', methods=['GET'])
 @token_required
 def get_all_users(current_user):
     return jsonify({'users':users})
 
-    # a user can ask a question
+
+
+    # a registered user can ask a question
 @app.route('/ask',methods=['POST'])
 @token_required
 def post_question(current_user):
+
     qn= request.get_json()['Question']
     # if no question is posted
     if not qn:
@@ -125,7 +130,9 @@ def post_question(current_user):
 def get_all_questions():
     return jsonify({'Questions':questions}), 201
 
-    # a user can search for a specific # QUESTION:
+
+
+    # a user can search for a specific question:
 @app.route('/find/<int:question_id>', methods= ['GET'])
 def view_question(question_id):
 
@@ -139,10 +146,12 @@ def view_question(question_id):
     return jsonify({"Question" :clicked_question}),201
 
 
+
     # a registered user can post an answer to a question
 @app.route('/answer/<int:question_id>', methods=['POST'])
 @token_required
 def answer_question(current_user,question_id):
+
     answer= request.get_json()['Answer']
 
     if not answer:
@@ -154,17 +163,18 @@ def answer_question(current_user,question_id):
             my_qn = question
     return jsonify({'result':my_qn}), 201
 
+
     # a registered user cam delete a question
 @app.route('/remove/<int:question_id>',methods=['DELETE'])
 @token_required
 def delete_question(current_user,question_id):
-
 
     for question in questions:
         if question_id in question.values():
             questions.remove(question)
 
     return jsonify({'Message':'Deleted succesfully'}), 201
+
 
 
 
