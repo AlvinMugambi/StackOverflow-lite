@@ -125,10 +125,10 @@ def post_question(current_user):
 def get_all_questions():
     return jsonify({'Questions':questions}), 201
 
-    # a user can search for a specific # QUESTION:
+    # a user can search for a specific question:
 @app.route('/find/<int:question_id>', methods= ['GET'])
 def view_question(question_id):
-    
+
     clicked_question = None
     for question in questions:
         if question['id'] == question_id:
