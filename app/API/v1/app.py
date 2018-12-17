@@ -31,7 +31,7 @@ def token_required(f):
                     current_user= user
 
         except:
-            return jsonify({'message':'Token is invalid'}), 401
+            return jsonify({'message':'Token is expired or invalid'}), 401
 
         return f(current_user, *args, **kwargs)
     return decorated
