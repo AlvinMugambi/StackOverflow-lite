@@ -1,7 +1,6 @@
 import json
 import datetime
 import jwt
-from functools import wraps
 from flask import Flask, request, jsonify, make_response
 from werkzeug.security import generate_password_hash, check_password_hash
 import uuid
