@@ -5,6 +5,7 @@ users= []
 questions= []
 
 
+
 def verify_user_email(email):
     verified_email = None
     for user in users:
