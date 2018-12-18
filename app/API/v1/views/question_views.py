@@ -9,7 +9,7 @@ from app.API.v1.models.model import users, verify_user_record, verify_user_email
 from .. import version1
 from app.API.v1.utils.validators import token_required
 
-
+    # A REGISTERED USER CAN POST A QUESTION
 @version1.route('/questions',methods=['POST'])
 @token_required
 def post_question(current_user):
@@ -26,14 +26,14 @@ def post_question(current_user):
     return jsonify({'Your Question':qn}), 201
 
 
-    # a user can view all Questions
+    # A USER CAN VIEW ALL QUESTIONS
 @version1.route('/questions', methods=['GET'])
 def get_all_questions():
-    return jsonify({'Questions':questions}), 201
+    return jsonify({'Questions':questions}), 200
 
 
 
-    # a user can search for a specific question:
+    # A USER CAN FETCH A SPECIFIC QUESTION
 @version1.route('/questions/<int:question_id>', methods= ['GET'])
 def find_question(question_id):
 
@@ -44,11 +44,11 @@ def find_question(question_id):
     if not clicked_question:
         return "message=Question with id {} not found".format(question_id)
 
-    return jsonify({"Question" :clicked_question}),201
+    return jsonify({"Question" :clicked_question}),200
 
 
 
-    # a registered user can post an answer to a question
+    # A REGISTERED USER CAN POST AN ANSWER TO A QUESTION
 @version1.route('/questions/<int:question_id>/answers', methods=['POST'])
 @token_required
 def answer_question(current_user,question_id):
@@ -66,14 +66,16 @@ def answer_question(current_user,question_id):
     for question in questions:
         if question_id in question.values():
             answer={"Answer": ans,
-                    "Answer_id":answer_id}
+                    "Answer_id":answer_id,
+                    "Accepted":False}
             question['Answers'].append(answer)
+            answers.append(answer)
             my_qn = question
 
     return jsonify({'result':my_qn}), 201
 
 
-    # a registered user cam delete a question
+    # A REGISTERED USER CAN DELETE A QUESTION
 @version1.route('/questions/<int:question_id>',methods=['DELETE'])
 @token_required
 def delete_question(current_user,question_id):
@@ -82,11 +84,23 @@ def delete_question(current_user,question_id):
         if question_id in question.values():
             questions.remove(question)
 
-    return jsonify({'Message':'Deleted succesfully'}), 201
+    return jsonify({'Message':'Deleted succesfully'}), 200
 
+    # A REGISTERED USER CAN ACCEPT AN ANSWER TO THEIR QUESTION AS THE PREFERRED 0R ACCEPTED ANSWER
+@version1.route('/questions/<int:question_id>/answers/<int:answer_id>', methods=['PUT'])
+@token_required
+def mark_answer(current_user,question_id,answer_id):
+    my_question=None
+    pref_answer=None
 
-@version1.route('/questions/<questionId>/answers/<answerId>', methods=['PUT'])
-def mark_answer():
+    for question in questions:
+        if question_id in question.values():
+            my_question=question
+    if not my_question:
+        return jsonify({"Error":"No question found with that id"}), 400
+    for answer in answers:
+        if answer_id in answer.values():
+            answer['Accepted']=True
+            pref_answer=answer
 
-    
-    pass
+    return jsonify({"Marked answer": pref_answer}), 201
