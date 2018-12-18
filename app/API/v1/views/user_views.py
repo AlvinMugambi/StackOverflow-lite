@@ -69,7 +69,7 @@ def login():
     if reg_user == "Doesn't exist":
         return jsonify({"message": "Please Register first"}), 404
 
-    token = jwt.encode({'public_id': public_id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60)}, key,algorithm='HS256')
+    token = jwt.encode({'public_id': public_id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=120)}, key,algorithm='HS256')
 
     return jsonify({'token': token.decode('UTF-8')})
 
@@ -79,4 +79,4 @@ def login():
 @version1.route('/users', methods=['GET'])
 @token_required
 def get_all_users(current_user):
-    return jsonify({'users':users})
+    return jsonify({'users':users}), 200
