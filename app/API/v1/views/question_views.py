@@ -1,11 +1,7 @@
 import json
-import datetime
 import jwt
-from functools import wraps
 from flask import Flask, request, jsonify, make_response
-from werkzeug.security import generate_password_hash, check_password_hash
-import uuid
-from app.API.v1.models.model import users, verify_user_record, verify_user_email, questions, answers
+from app.API.v1.models.model import users, questions, answers
 from .. import version1
 from app.API.v1.utils.validators import token_required
 
