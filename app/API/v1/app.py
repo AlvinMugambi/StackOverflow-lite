@@ -40,7 +40,7 @@ def token_required(f):
 # MY ROUTES
     # register/add a user
 
-@app.route('/register', methods=['POST'])
+@app.route('/auth/signup', methods=['POST'])
 def create_user():
     user= {}
     name = request.get_json()['name']
@@ -73,7 +73,7 @@ def create_user():
 
 
 # authenticate login and create token
-@app.route('/login', methods=['POST'])
+@app.route('/auth/login', methods=['POST'])
 def login():
     password = request.get_json()['password']
     username = request.get_json()['name']
@@ -109,7 +109,7 @@ def get_all_users(current_user):
 
 
     # a registered user can ask a question
-@app.route('/ask',methods=['POST'])
+@app.route('/questions',methods=['POST'])
 @token_required
 def post_question(current_user):
 
@@ -133,8 +133,8 @@ def get_all_questions():
 
 
     # a user can search for a specific question:
-@app.route('/find/<int:question_id>', methods= ['GET'])
-def view_question(question_id):
+@app.route('/questions/<int:question_id>', methods= ['GET'])
+def find_question(question_id):
 
     clicked_question = None
     for question in questions:
@@ -148,7 +148,7 @@ def view_question(question_id):
 
 
     # a registered user can post an answer to a question
-@app.route('/answer/<int:question_id>', methods=['POST'])
+@app.route('/questions/<int:question_id>/answers', methods=['POST'])
 @token_required
 def answer_question(current_user,question_id):
 
@@ -165,7 +165,7 @@ def answer_question(current_user,question_id):
 
 
     # a registered user cam delete a question
-@app.route('/remove/<int:question_id>',methods=['DELETE'])
+@app.route('/questions/<int:question_id>',methods=['DELETE'])
 @token_required
 def delete_question(current_user,question_id):
 
