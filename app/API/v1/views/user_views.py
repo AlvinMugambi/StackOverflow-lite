@@ -5,7 +5,7 @@ from flask import Flask, request, jsonify, make_response
 from werkzeug.security import generate_password_hash, check_password_hash
 import uuid
 from app.API.v1.models.model import users, verify_user_record, verify_user_email,questions
-from .. import version1
+from app.API.v1 import version1
 from app.API.v1.utils.validators import token_required, key
 
 

@@ -2,7 +2,7 @@ import json
 import jwt
 from flask import Flask, request, jsonify, make_response
 from app.API.v1.models.model import users, questions, answers
-from .. import version1
+from app.API.v1 import version1
 from app.API.v1.utils.validators import token_required
 
     # A REGISTERED USER CAN POST A QUESTION

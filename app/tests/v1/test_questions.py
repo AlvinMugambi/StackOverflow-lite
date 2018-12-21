@@ -1,7 +1,7 @@
 import unittest
 import json
 
-from app import create_app
+from app.API.v1.views import create_app
 
 class BaseQuestions(unittest.TestCase):
 
@@ -20,9 +20,12 @@ class BaseQuestions(unittest.TestCase):
         self.question_3= {"Question":"What is jquery",
                             "Title": "Jquery",
                             "Category": "Javascript"}
+
         self.question_4= {"Question":"",
                             "Title": "",
                             "Category": ""}
+
+        self.answer_1= {"Answer":"Programming is the process of creating a set of instructions that tell a computer how to perform a task. Programming can be done using a variety of computer 'languages,' such as SQL, Java, Python, and C++."}
 
         self.questions= [{"Question":"What is programming",
                             "id": 1,
@@ -33,6 +36,15 @@ class BaseQuestions(unittest.TestCase):
                             {"Question":"What is jquery",
                             "id": 3,
                             "Answers": []}]
+        self.answer_1= {"Answer":"Programming is the process of creating a set of instructions that tell a computer how to perform a task. Programming can be done using a variety of computer 'languages,' such as SQL, Java, Python, and C++." ,
+                        "Answer_id": 1,
+                        "Accepted":False}
+
+        self.qtn_ans={"Question":"What is programming",
+                            "id": 1,
+                        "Answers": [{"Answer":"Programming is the process of creating a set of instructions that tell a computer how to perform a task. Programming can be done using a variety of computer 'languages,' such as SQL, Java, Python, and C++." ,
+                                    "Answer_id":1,
+                                    "Accepted":False}]}
 
     def tearDown(self):
         self.app.testing =False
@@ -49,4 +61,7 @@ class TestQuestions(BaseQuestions):
         response= self.client.post("api/v1/questions", json=self.question_1, content_type= 'application/json')
         self.assertEqual(response.status_code, 201)
 
-    
+    def test_user_can_answer_question(self):
+        self.client.post("/api/v1/questions", json= self.question_1, content_type= 'application/json')
+        self.client.post("/api/v1/questions/1/answers", json=self.answer_1, content_type= 'application/json')
+        pass
