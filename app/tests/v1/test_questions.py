@@ -1,7 +1,9 @@
 import unittest
 import json
 
-from app.API.v1.views import create_app
+from app import create_app
+
+APP= create_app()
 
 class BaseQuestions(unittest.TestCase):
 
@@ -65,3 +67,7 @@ class TestQuestions(BaseQuestions):
         self.client.post("/api/v1/questions", json= self.question_1, content_type= 'application/json')
         self.client.post("/api/v1/questions/1/answers", json=self.answer_1, content_type= 'application/json')
         pass
+
+
+if __name__ == '__main__':
+    unittest.main()

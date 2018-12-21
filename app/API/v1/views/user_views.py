@@ -9,8 +9,6 @@ from app.API.v1 import version1
 from app.API.v1.utils.validators import token_required, key
 
 
-
-
 # MY ROUTES
     # register/add a user
 
