@@ -14,7 +14,9 @@ def post_question(current_user):
     # if no question is posted
     if not qn:
         return jsonify({"message": "Ask a question"}), 400
-    question_id=len(questions)+1
+    last_q = questions[-1]
+    last_id= last_q['id']
+    question_id= last_id + 1
     question={'id':question_id, 'Question':qn, 'Answers':[]}
     # append the question dict to the questions list
     questions.append(question)
@@ -57,7 +59,9 @@ def answer_question(current_user,question_id):
     my_qn= None
     answer=None
 
-    answer_id= len(answers)+1
+    last_a = answers[-1]
+    last_id= last_a['id']
+    answer_id= last_id + 1
 
     for question in questions:
         if question_id in question.values():
