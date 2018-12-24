@@ -1,14 +1,13 @@
 import unittest
 import json
 
-from app import create_app
+from app.API.v1.views import question_views
 
-# APP= create_app()
 
 class BaseQuestions(unittest.TestCase):
 
     def setUp(self):
-        self.app= create_app("testing")
+        self.app= create_app()
         self.client=self.app.test_client()
 
         self.question_1 = {"Question":"What is programming",
