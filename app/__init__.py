@@ -1,6 +1,7 @@
+from flask import Flask, Blueprint
 from app.API.v1.views.user_views import version1 as users
 from app.API.v1.views.question_views import version1 as question
-from flask import Flask, Blueprint
+
 
 def create_app():
     app= Flask(__name__)

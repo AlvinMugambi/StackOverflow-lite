@@ -1,12 +1,12 @@
 import json
 import datetime
 import jwt
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, request, jsonify, make_response, abort
 from werkzeug.security import generate_password_hash, check_password_hash
 import uuid
-from app.API.v1.models.model import users, verify_user_record, verify_user_email,questions
+from app.API.v1.models.model import users, questions
 from .. import version1
-from app.API.v1.utils.validators import token_required, key
+from app.API.v1.utils.validators import token_required, key, verify_user_records, validate_email, check_password
 
 
 
@@ -17,22 +17,21 @@ from app.API.v1.utils.validators import token_required, key
 @version1.route('/auth/signup', methods=['POST'])
 def create_user():
     user= {}
-    name = request.get_json()['name']
-    email= request.get_json()['email']
-    password=request.get_json()['password']
+    name = request.get_json()['Username']
+    email= request.get_json()['Email']
+    password=request.get_json()['Password']
+    conf_pass= request.get_json()['Confirm_Password']
     public_id=str(uuid.uuid4())
 
-    if not name or not email or not password:
-        response = jsonify({"error": "Name, email and password fields required"})
-        return response, 400
+    if not name or not email or not password or not conf_pass:
+        abort(make_response("All fields are required")), 400
 
-    new_user= verify_user_email(email)
-    print("USER >> ", new_user)
+    email= validate_email(email)
+    hashed_password=check_password(password,conf_pass)
+    print("USER >> ", email)
 
-    if new_user == 'Email already taken!':
-        return jsonify({'error': 'Email already taken!'})
-
-    hashed_password = generate_password_hash(password,method= 'sha256')
+    # if new_user == 'Email already taken!':
+    #     return jsonify({'error': 'Email already taken!'})
 
     user = {
         'name':name,
@@ -49,24 +48,26 @@ def create_user():
 # authenticate login and create token
 @version1.route('/auth/login', methods=['POST'])
 def login():
-    password = request.get_json()['password']
-    username = request.get_json()['name']
+    password = request.get_json()['Password']
+    email = request.get_json()['Email']
     response = None
 
 
-    if not password or not username:
+    if not password or not email:
         # if field(s) are empty
         response = jsonify({"error": "Name and Password fields required"})
         # response.status_code = 400
         return response, 400
 
-    reg_user = verify_user_record(username, password)
+    reg_user = verify_user_records(email,password)
 
     # print("USER >> ", user)
     for user in users:
-        public_id= user['public_id']
-    if reg_user == "Doesn't exist":
-        return jsonify({"message": "Please Register first"}), 404
+        if email in user.values():
+            public_id= user['public_id']
+
+    if not reg_user:
+        abort(make_response(jsonify(message= "Please Register First" ), 400))
 
     token = jwt.encode({'public_id': public_id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=120)}, key,algorithm='HS256')
 
