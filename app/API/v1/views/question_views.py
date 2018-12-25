@@ -60,7 +60,7 @@ def answer_question(current_user,question_id):
     answer=None
 
     last_a = answers[-1]
-    last_id= last_a['id']
+    last_id= last_a['Answer_id']
     answer_id= last_id + 1
 
     for question in questions:
