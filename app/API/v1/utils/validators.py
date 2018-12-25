@@ -1,4 +1,5 @@
 import os
+import re
 import jwt
 from app.API.v1.models.model import users
 from flask import jsonify, request, abort, make_response
