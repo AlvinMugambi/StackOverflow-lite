@@ -20,10 +20,10 @@ def create_user():
     name = request.get_json()['Username']
     email= request.get_json()['Email']
     password=request.get_json()['Password']
-    conf_pass= request.get_json()['Confirm Password']
+    conf_pass= request.get_json()['Confirm_Password']
     public_id=str(uuid.uuid4())
 
-    if not username or not email or not password or not conf_pass:
+    if not name or not email or not password or not conf_pass:
         abort(make_response("All fields are required")), 400
 
     email= validate_email(email)
@@ -48,7 +48,7 @@ def create_user():
 # authenticate login and create token
 @version1.route('/auth/login', methods=['POST'])
 def login():
-    password = request.get_json()['password']
+    password = request.get_json()['Password']
     email = request.get_json()['Email']
     response = None
 
