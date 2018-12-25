@@ -2,8 +2,10 @@ from flask import Flask, request, jsonify
 
 
 users= []
-questions= []
-answers=[]
+questions= [{'id':1, 'Question':"initiator?", 'Answers':[]}, ]
+answers=[{"Answer": "initiator ans",
+        "Answer_id":1,
+        "Accepted":False},]
 
 
 
