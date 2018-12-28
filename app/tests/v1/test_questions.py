@@ -1,7 +1,7 @@
 import unittest
 import json
 
-from app.API.v1.views import question_views
+from runpy import app
 
 
 class BaseQuestions(unittest.TestCase):
