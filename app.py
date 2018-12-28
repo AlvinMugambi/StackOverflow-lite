@@ -1,23 +1,11 @@
-
+import os
 from app import create_app
 
 
 # version1 = Blueprint("apiv1", __name__, url_prefix="/api/v1")
+config_name = os.getenv('APP_SETTINGS') # config_name = "development"
+app = create_app(config_name)
 
-app= create_app()
-
-
-
-
-
-# MY DECORATORS
-
-    # decorator where a user requires a token to view
-
-
-
-
-    # a registered user can ask a question
 
 if __name__ == '__main__':
-        app.run(debug=True)
+        app.run()
