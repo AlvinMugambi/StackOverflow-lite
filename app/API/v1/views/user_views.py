@@ -55,7 +55,7 @@ def login():
 
     if not password or not email:
         # if field(s) are empty
-        response = jsonify({"error": "Name and Password fields required"})
+        response = jsonify({"error": "Email and Password fields required"})
         # response.status_code = 400
         return response, 400
 
@@ -66,8 +66,6 @@ def login():
         if email in user.values():
             public_id= user['public_id']
 
-    if not reg_user:
-        abort(make_response(jsonify(message= "Please Register First" ), 400))
 
     token = jwt.encode({'public_id': public_id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=120)}, key,algorithm='HS256')
 
