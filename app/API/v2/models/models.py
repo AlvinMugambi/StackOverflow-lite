@@ -1,18 +1,19 @@
 from app import db
 
-class Users(db.Model):
+class Question(db.Model):
     # this class represents the users table
 
-    __tablename__= 'users'
+    __tablename__= 'questions'
 
     id= db.Column(db.Integer, primary_key=True)
-    name= db.Column(db.String(255))
-    email=db.Column(db.String(255))
-    password=db.Column(db.String(255))
+    title= db.Column(db.String(255))
+    question= db.Column(db.String(1000))
+    answer=db.Column(db.String(1000))
     date_registered= db.Column(db.DateTime, default=db.func.current_timestamp())
 
+
     def __init__(self,name):
-        self.name = name
+        self.title = title
 
     def save(self):
         db.session,add(self)
@@ -26,4 +27,4 @@ class Users(db.Model):
         db.session.commit()
 
     def __repr__(self):
-        return "<Users:{}>".format(self.name)
+        return "<Questions:{}>".format(self.title)
