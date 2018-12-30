@@ -1,7 +1,9 @@
+import pytest
 import unittest
 import json
+import os
 
-from runpy import app
+from app import create_app
 
 
 class BaseQuestions(unittest.TestCase):
