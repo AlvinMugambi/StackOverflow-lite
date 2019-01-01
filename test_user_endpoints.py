@@ -60,7 +60,9 @@ class UserBaseTest(unittest.TestCase):
 
 
 class TestUserSignUpandLogin(UserBaseTest):
+
     def test_user_can_sign_up(self):
+        # test the endpoint that allows a user to successfully signup
         response= self.client.post('api/v1/auth/signup', data= json.dumps(self.user2), content_type="application/json")
         self.assertEqual(response.status_code, 201)
         result = json.loads(response.data.decode('utf-8'))
