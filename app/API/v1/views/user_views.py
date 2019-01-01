@@ -17,14 +17,17 @@ from app.API.v1.utils.validators import token_required, key, verify_user_records
 @version1.route('/auth/signup', methods=['POST'])
 def create_user():
     user= {}
-    name = request.get_json()['Username']
-    email= request.get_json()['Email']
-    password=request.get_json()['Password']
-    conf_pass= request.get_json()['Confirm_Password']
-    public_id=str(uuid.uuid4())
+    try:
+        name = request.get_json()['Username']
+        email= request.get_json()['Email']
+        password=request.get_json()['Password']
+        conf_pass= request.get_json()['Confirm_Password']
+        public_id=str(uuid.uuid4())
+    except:
+        return jsonify({'Key Error': 'Check your json Keys. Should be Username, Email, Password and Confirm_Password'}), 400
 
     if not name or not email or not password or not conf_pass:
-        abort(make_response("All fields are required")), 400
+        abort(make_response(jsonify(message="All fields are required"), 400))
 
     email= validate_email(email)
     hashed_password=check_password(password,conf_pass)
@@ -55,7 +58,7 @@ def login():
 
     if not password or not email:
         # if field(s) are empty
-        response = jsonify({"error": "Name and Password fields required"})
+        response = jsonify({"error": "Email and Password fields required"})
         # response.status_code = 400
         return response, 400
 
@@ -66,8 +69,6 @@ def login():
         if email in user.values():
             public_id= user['public_id']
 
-    if not reg_user:
-        abort(make_response(jsonify(message= "Please Register First" ), 400))
 
     token = jwt.encode({'public_id': public_id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=120)}, key,algorithm='HS256')
 
