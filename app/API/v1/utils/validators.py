@@ -39,8 +39,7 @@ def token_required(f):
     # verify a user has input matching passwords and valid passwords
 def check_password(password, confirmed_password):
         # check if password meets required length
-    if (len(password)<6) or (len(password)>12):
-        abort (make_response()),400
+    if len(password)<6 or len(password)>12:
         abort(make_response(jsonify(message="Password should not be less than 6 characters or exceed 12"), 400))
 
     # check if password contains at least an alphabet(a-z)
