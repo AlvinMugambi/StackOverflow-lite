@@ -72,7 +72,7 @@ def login():
 
     token = jwt.encode({'public_id': public_id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=120)}, key,algorithm='HS256')
 
-    return jsonify({'token': token.decode('UTF-8')})
+    return jsonify({'token': token.decode('UTF-8')}), 200
 
 
 
