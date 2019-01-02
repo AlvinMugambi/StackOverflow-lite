@@ -18,6 +18,11 @@ class UserBaseTest(unittest.TestCase):
                     "Password":"LordVader1",
                     "Confirm_Password":"LordVader1"}
 
+        self.user3= {"Username":"ObiWan",
+                    "Email":"canobi@gmail.com",
+                    "Password":"theForce1",
+                    "Confirm_Password":"theForce1"}
+
         self.user_empty_data= {"Username":"",
                     "Email":"",
                     "Password":"",
@@ -133,9 +138,10 @@ class TestUserSignUpandLogin(UserBaseTest):
         self.assertEqual(result["message"], "Password should contain a number(0-9)")
 
     def test_user_can_log_in(self):
-        # test the response if a user logs in successfully
-        self.client.post('api/v1/auth/signup', data= json.dumps(self.user1), content_type="application/json")
-        response=self.client.post('api/v1/auth/login', data= json.dumps(self.user1), content_type="application/json")
+        # test the response if a user can log in successfully
+        signup=self.client.post('api/v1/auth/signup', data= json.dumps(self.user3), content_type="application/json")
+        self.assertEqual(signup.status_code, 201)
+        response=self.client.post('api/v1/auth/login', data= json.dumps(self.user3), content_type="application/json")
         self.assertEqual(response.status_code, 200)
 
     def test_user_not_in_records(self):
